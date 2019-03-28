@@ -1,0 +1,53 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+//Account account = new Account();
+//account = HttpContext.Session.getJson<Account>("Account");
+//if (account == null)
+//{
+
+//}
+}
+@*@model Account - commented this out 14012019*@
+@*@model Login
+    @if (Model.Name.Length == 0)*@
+@*@model Sessions*@
+@*@model Account*@
+@*@if (Model == null)*@
+@*@if (@httpContext.Session.getJson("ids"))*@
+@*{*@
+@*<div>
+        class="right">
+        <a asp-action="CreateAccount" class="btn btn-sm btn-primary" asp-controller="Account">Create Account</a>
+        <a asp-action="LogIn" class="btn btn-sm btn-primary" asp-controller="Account">Log In</a>
+    </div>
+    }
+    else
+    {
+    <div class="right">
+        <a>Hello </a><input type="text" asp-for="Name" readonly="readonly" />
+        <a asp-action="LogOut" class="btn btn-sm btn-primary" asp-controller="Account">Log Out</a>
+    </div>
+    }*@
+@*@model Account*@
+@*@model PatientAppointmentReferral*@
+@*@if(Model == null)*@
+@*@if(Model == null)*@
+@model Login
+@if(Model == null)
+{
+    <ul class="nav navbar-nav">
+        <li><a asp-action="CreateAccount" class="btn btn-sm btn-primary" asp-controller="Account">Create Account</a></li>
+        <li><a asp-action="LogIn" class="btn btn-sm btn-primary" asp-controller="Account">Log In</a></li>
+    </ul>
+}
+else
+{
+    <ul class="nav navbar-nav">
+        <a>Hello </a>
+        <li><label>@Model.Username</label></li>
+        @*<li><input type="text" asp-for="Name" readonly="readonly" /></li>*@
+        <li><a asp-action="LogOut" class="btn btn-sm btn-primary" asp-controller="Account">Log Out</a></li>
+    </ul>
+}

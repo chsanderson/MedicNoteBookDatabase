@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@if (ViewData["Error"] != null)
+{
+    <div></div>
+    <h1>ViewData["Error"]</h1>
+}
+<a asp-action="CreateAppointment" asp-controller="Appointment" asp-area="">
+    <div class="col-md-3">
+        <h2>Create Appointment</h2>
+        <hr />
+        <br />
+        <p>This allows you to be able to ask for an appointment</p>
+    </div>
+</a>
+
+<div></div>
+
+<a asp-action="Index" asp-controller="Appointment" asp-area="">
+    <div class="col-md-3">
+        <h2>Appointment Home</h2>
+        <hr />
+        <br />
+        <p>This will take you to the appointment home page</p>
+    </div>
+</a>
+
+<div></div>
+
+<a>
+    @* asp-action="Search" asp-controller="Appointment" asp-area="">*@
+    <div class="col-md-3">
+        <h2>Search Appointment</h2>
+        <hr />
+        <p>Check your status of your recent appointment request by entering your name and date of birth</p>
+        <form method="post" asp-action="Search" asp-controller="Appointment" asp-area="">
+            <a>Name: <input type="text" id="Name" name="Name" /></a><br />
+            <a>Date Of Birth<input type="date" id="DOB" name="DOB" /></a><br />
+            <input type="submit" />
+            <input type="reset" />
+            @* </a> *@
+        </form>
+        @*<h2>Search</h2>
+            <hr />
+            <br />
+            <p>This allows you to be able to check your request for an appointment</p>*@
+    </div>
+</a>

@@ -1,0 +1,54 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Account
+<div> @*class="form-control">*@
+    <h2>User Details</h2>
+    <input type="hidden" asp-for="ID" />
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <div>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <input type="text" asp-for="Name" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DOB"></label>
+        <div>
+            <span asp-validation-for="DOB" class="text-danger"></span>
+        </div>
+        <input type="date" asp-for="DOB" />
+    </div>
+    <div class="form-group">
+        <label asp-for="CHINumber"></label>
+        <div>
+            @*<span asp-validation-for="CHINumber" class="text-danger"></span>*@
+        </div>
+        <input type="number" asp-for="CHINumber" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Username"></label>
+        <div>
+            <span class="text-danger">@TempData["Username"]</span>
+            @*<span asp-validation-for="Username" class="text-danger"></span>*@
+        </div>
+        <input type="text" asp-for="Username" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <div>
+            <span class="text-danger">@TempData["Password"]</span>
+            @*<span asp-validation-for="Password" class="text-danger"></span>*@
+        </div>
+        <input type="password" asp-for="Password" />
+    </div>
+    <div>
+        <label>Confirm Password</label>
+        <div>
+            <span class="text-danger">@TempData["Password"]</span>
+        </div>
+        <input type="password" name="confirmPassword" id="confirmPassword" />
+    </div>
+</div>

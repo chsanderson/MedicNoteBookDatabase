@@ -1,0 +1,94 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "View Schedule";
+    Layout = "../Shared/_LayoutUser.cshtml";
+}
+<div>
+    @{
+        List<Appointment> appointments = new List<Appointment>();
+        appointments = ViewBag.Appointments;
+    }
+    @if (appointments.Count > 0)
+    {
+        <div>
+
+            <h2>@Context.Session.GetString("Name")'s Appointments</h2>
+            <table>
+                <tr>
+                    <th class="text-left" style="border-left: solid;"></th>
+                    <th class="text-left">Appointment Date and Time</th>
+                    <th class="text-left">Symptoms</th>
+                    <th class="text-left">Diagnosis</th>
+                    <th class="text-left">Patient Name</th>
+                    <th class="text-left">Appointment Type</th>
+                    <th class="text-left">Date Of Birth</th>
+                    <th class="text-left">Address</th>
+                    <th class="text-left">County</th>
+                    <th class="text-left">Region</th>
+                    <th class="text-left">Postcode</th>
+                    <th class="text-left" style="border-right: solid;"></th>
+                </tr>
+                @foreach (var item in appointments)
+                {
+                    <tr>
+                        <td></td>
+                        <td>@item.AppointmentDate</td>
+                        <td>@item.Symptoms</td>
+                        <td>@item.Diagnosis</td>
+                        <td>@item.PatientFullName</td>
+                        <td>@item.AppointmentType</td>
+                        <td>@item.DOB.Date.ToShortDateString()</td>
+                        <td>@item.StreetNumber @item.StreetName</td>
+                        <td>@item.County</td>
+                        <td>@item.Region</td>
+                        <td>@item.Postcode</td>
+                        <td></td>
+                    </tr>
+                    <tr></tr>
+                }
+            </table>
+        </div>
+    }
+    @{
+        List<PatientAppointmentReferral> PAR = new List<PatientAppointmentReferral>();
+        PAR = ViewBag.PAR;
+    }
+    @if(PAR.Count > 0)
+    {
+        <div>
+            <h2>@Context.Session.GetString("Name")'s Guest Appointments</h2>
+            <table>
+                <tr>
+                    <th>Appointment Date and Time</th>
+                    <th>Symptoms</th>
+                    <th>Decision</th>
+                    <th>Patient Name</th>
+                    <th>Appointment Type</th>
+                    <th>Date Of Birth</th>
+                    <th>Address</th>
+                    <th>County</th>
+                    <th>Region</th>
+                    <th>Postcode</th>
+                </tr>
+                @foreach (var item in PAR)
+                {
+                    <tr>
+                        <td>@item.RequestedDate</td>
+                        <td>@item.Symptoms</td>
+                        <td>@item.Decision</td>
+                        <td>@item.Name</td>
+                        <td>Surgery</td>
+                        <td>@item.DOB.Date.ToShortDateString()</td>
+                        <td>@item.StreetNumber @item.StreetName</td>
+                        <td>@item.County</td>
+                        <td>@item.Region</td>
+                        <td>@item.Postcode</td>
+                    </tr>
+                    <tr></tr>
+                }
+            </table>
+        </div>
+    }
+</div>

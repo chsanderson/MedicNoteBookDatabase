@@ -1,0 +1,53 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Edit Appointment";
+    if (Context.Session.GetString("Name") != "" || Context.Session.GetString("Name") != null)
+    {
+        Layout = "../Shared/_LayoutUser.cshtml";
+    }
+    else
+    {
+        Layout = "_Layout.cshtml";
+    }
+}
+@model Appointment
+<div>
+    <h2>Edit Appointment</h2>
+    <form method="post" asp-action="EditAppointment" asp-controller="Patient">
+        <input type="hidden" asp-for="AppointmentID" />
+        <input type="hidden" asp-for="UserReferralID" />
+        <input type="hidden" asp-for="AppointmentMedicalProfessional" />
+        <input type="hidden" asp-for="AppointmentType" />
+        <input type="hidden" asp-for="CurrentDate" />
+        <input type="hidden" asp-for="DOB" />
+        <input type="hidden" asp-for="PatientFullName" />
+        <input type="hidden" asp-for="Postcode" />
+        <input type="hidden" asp-for="Region" />
+        <input type="hidden" asp-for="County" />
+        <input type="hidden" asp-for="StreetName" />
+        <input type="hidden" asp-for="StreetNumber" />
+        <input type="hidden" asp-for="AppointmentTime" />
+        <div class="form-group">
+            <label>Appointment Date:</label>
+            <div></div>
+            <select onchange="onFormSelected(this.value)" asp-items="@(new SelectList(@ViewBag.Dates))" asp-for="AppointmentDate"></select>
+        </div>
+        <div class="form-group">
+            <label>Symptoms</label>
+            <div></div>
+            <textarea asp-for="Symptoms"></textarea>
+        </div>
+        @if(Context.Session.GetString("Type") == "Doctor" || Context.Session.GetString("Type") == "Nurse")
+        {    
+            <div class="form-group">
+                <label>Diagnosis</label>
+                <div></div>
+                <textarea asp-for="Diagnosis"></textarea>
+            </div>
+        }
+        <input type="submit" />
+    </form>
+    <a asp-action="Index" asp-controller="Patient">Cancel</a>
+</div>

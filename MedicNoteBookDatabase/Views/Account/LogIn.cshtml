@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Login
+@*<div>*@
+    @*style="background-color: white;">*@@*class="center-block">*@
+        <div class="text-center align-items-center">
+            <h2 >Login</h2>
+        </div>
+        <form asp-action="Login" method="post" class="text-center">
+            <div class="form-group">
+                <label asp-for="Username"></label>
+                <div>
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <input type="text" asp-for="Username" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <div>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <input type="password" asp-for="Password" />
+            </div>
+            <button type="submit">Log In</button>
+        </form>
+        <div class="text-center glyphicon-object-align-vertical center-block">
+            <a  asp-action="CreateAccount" asp-controller="Account" asp-area="">If you don't already have an account click here</a>
+        </div>
+@*</div>*@
+<br />

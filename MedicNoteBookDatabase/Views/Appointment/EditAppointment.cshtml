@@ -1,0 +1,150 @@
+﻿@{
+    ViewData["Title"] = "Edit Appointment";
+}
+@model PatientAppointmentReferral
+    @*IEnumerable<PatientAppointmentReferral>*@
+
+<div>
+    <form asp-action="EditAppointment" method="post">
+        <h2>Edit Appointment</h2>
+        <input type="hidden" asp-for="PatientApplicationReferralID" />
+        <input type="hidden" asp-for="CurrentDate" />
+        @*<input type="hidden" asp-for="Decision" />*@
+        @*@foreach(var item in Model)
+        {*@
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Name: </label>
+                <div>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <input type="text" asp-for="Name" readonly="readonly" />
+            </div>
+            <div class="form-group">
+                <label>Requested Date: </label>
+                <div>
+                    <span asp-validation-for="RequestedDate" class="text-danger"></span>
+                </div>
+                <select asp-for="RequestedDate" onchange="onFormSelected(this.value)" asp-items="@(new SelectList(@ViewBag.Dates))"></select>
+                @*<input type="date" asp-for="RequestedDate" />*@
+            </div>
+            @if (@*Context.Session.GetString("Type") != null &&*@ Context.Session.GetString("Type") == "Doctor" || Context.Session.GetString("Type") == "Nurse")
+            {
+                <div>
+                    <label>Decision: </label>
+                    <div>
+                        <span></span>
+                    </div>
+                    <input type="text" asp-for="Decision" />
+                </div>
+            }
+            else
+            {
+                <input type="hidden" asp-for="Decision" />
+            }
+            @*<div class="form-group">
+                <label>Requested Time: </label>
+                <div>
+                    <span asp-validation-for="RequestedTime" class="text-danger"></span>
+                </div>
+                <input type="time" asp-for="RequestedTime" />
+            </div>*@
+            <div class="form-group">
+                <label>Symptoms: </label>
+                <div>
+                    <span asp-validation-for="Symptoms" class="text-danger"></span>
+                </div>
+                <textarea asp-for="Symptoms" @*readonly="readonly"*@></textarea>
+                @*<input type="text" asp-for="Symptoms" />*@
+            </div>
+            <div class="form-group">
+                <label>DOB: </label>
+                <div>
+                    <span asp-validation-for="DOB" class="text-danger"></span>
+                </div>
+                <input type="date" asp-for="DOB" readonly="readonly" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Street Number: </label>
+                <div>
+                    <span asp-validation-for="StreetNumber" class="text-danger"></span>
+                </div>
+                <input type="text" asp-for="StreetNumber" readonly="readonly" />
+            </div>
+            <div class="form-group">
+                <label>Street Name: </label>
+                <div>
+                    <span asp-validation-for="StreetName" class="text-danger"></span>
+                </div>
+                <input type="text" asp-for="StreetName" readonly="readonly" />
+            </div>
+            <div class="form-group">
+                <label>County: </label>
+                <div>
+                </div>
+                <input type="text" asp-for="County" readonly="readonly" />
+            </div>
+            <div class="form-group">
+                <label>Region: </label>
+                <div>
+                    <span asp-validation-for="Region" class="text-danger"></span>
+                </div>
+                <input type="text" asp-for="Region" readonly="readonly" />
+            </div>
+            <div class="form-group">
+                <label>Postcode: </label>
+                <div>
+                    <span asp-validation-for="Postcode" class="text-danger"></span>
+                </div>
+                <input type="text" asp-for="Postcode" readonly="readonly" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <div>
+                    <span asp-validation-for="Email"></span>
+                </div>
+                <input type="email" asp-for="Email" readonly="readonly" />
+            </div>
+            <div class="form-group">
+                <label asp-for="HomePhone"></label>
+                <div>
+                    <span asp-validation-for="HomePhone"></span>
+                </div>
+                <input type="tel" asp-for="HomePhone" readonly="readonly" />
+            </div>
+            <div class="form-group">
+                <label asp-for="WorkPhone"></label>
+                <div>
+                    <span asp-validation-for="WorkPhone"></span>
+                </div>
+                <input type="tel" asp-for="WorkPhone" readonly="readonly" />
+            </div>
+            <div class="form-group">
+                <label asp-for="MobilePhone"></label>
+                <div>
+                    <span asp-validation-for="MobilePhone"></span>
+                </div>
+                <input type="tel" asp-for="MobilePhone" readonly="readonly" />
+            </div>
+            <div class="form-group">
+                <label asp-for="NextOfKin"></label>
+                <div>
+                    <span asp-validation-for="NextOfKin"></span>
+                </div>
+                <input type="text" asp-for="NextOfKin" readonly="readonly" />
+            </div>
+        </div>
+        <input type="submit" value="submit" />
+        @* }*@
+    </form>
+    <form asp-action="Search" asp-area="" asp-controller="Appointment" method="post">
+        <input type="hidden" asp-for="Name" id="Name" name="Name"/>
+        <input type="hidden" asp-for="DOB" id="DOB" name="DOB"/>
+        <button type="submit">Cancel</button>
+        @*<a asp-action="Search" asp-area="" asp-controller="Appointment">Cancel</a>*@
+    </form>
+        </div>

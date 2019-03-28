@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+<div>@* style="background-color: white;">*@
+    <div></div>
+    @*<div>
+        <h2>@TempData["Error"]</h2>
+    </div>*@
+    <div>
+        <form asp-action="CreateAccount" method="post">
+            <div class="col-md-4">
+                <partial name="Users" />
+            </div>
+            <div class="col-md-4">
+                <partial name="Address" />
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <span class="text-danger">@TempData["ContactDetails"]</span>
+                </div>
+                <partial name="ContactDetails" />
+            </div>
+            <button type="submit">Create Account</button>
+        </form>
+    </div>
+    <div>
+        <a asp-action="LogIn" asp-controller="Account" asp-area="">Already have an account click here</a>
+    </div>
+</div>
+<br/>
+@*<partial name="~/Views/Account/Users"/>
+    <partial name="~/Views/Account/Address"/>
+    <partial name="~/Views/Account/ContactDetails"/>*@

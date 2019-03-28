@@ -1,0 +1,245 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ 
+    ViewData["Title"] = "Create Appointment";
+}
+@model PatientAppointmentReferral
+
+@if(Context.Session.GetString("Name") == null)//(Model == null)
+{
+    Layout = "../Shared/_Layout";
+}
+else
+{
+    Layout = "../Shared/_LayoutUser";
+}
+<div @*style="background-color: white;"*@>
+    <form method="post" asp-action="CreatingAppointment">
+        <h2>Create Appointment</h2>
+        <input type="hidden" asp-for="PatientApplicationReferralID" />
+        <div class="col-md-3"style="background-color: white;">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <div>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <input type="text" asp-for="Name" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DOB"></label>
+                <div>
+                    <span asp-validation-for="DOB" class="text-danger"></span>
+                </div>
+                <input type="date" asp-for="DOB" />
+            </div>
+            @*</div>
+        <partial name="PAR" />
+
+            <div class="col-md-3">*@
+            @*@if (@*Context.Session.GetString("Name") != null && /**/*@@*Context.Session.GetString("Type") == "Nurse" || Context.Session.GetString("Type") == "Doctor" || Context.Session.GetString("Type") == "Patient")
+        {*@
+            <div class="form-group">
+                <label>Doctor:</label>
+                <div>
+                    <span></span>
+                </div>
+                <input type="text" asp-for="MedicalPersonnel" readonly="readonly" />
+            </div>
+            @*<div class="form-group">
+            <label>Requested Date:</label>
+            <div>
+                <span asp-validation-for="RequestedDate" class="text-danger"></span>
+            </div>
+
+            <input type="date" asp-for="RequestedDate" />
+        </div>
+        <div class="form-group">
+            <label>Requested Time:</label>
+            <div>
+                <span asp-validation-for="RequestedTime" class="text-danger"></span>
+            </div>
+            <input type="time" asp-for="RequestedTime" />
+        </div>
+            </div>*@@*// = Context.Session.getJson<>(Model.MedicalPersonnel);*@
+            @*}//, "ID", "Time"))"></select>
+        <select asp-for="RequestedTime" asp-items="@(new SelectList(@ViewBag.times.ToString().Substring(0,5), "ID", "Time"))"></select>
+        @if (Model.MedicalPersonnel == null || Model.MedicalPersonnel == "" || Model.MedicalPersonnel == "None")*@
+
+
+            @*}
+        else
+        {
+            @*<div>*@
+            @*<div class="form-group">
+            <label>Doctor:</label>
+            <div>
+                <span></span>
+            </div>
+            @Html.DropDownList(ViewBag.Dates)
+        <select asp-for="MedicalPersonnel" onchange="onFormSelected(this.value)" asp-items="@(new SelectList(@ViewBag.doctors))"></select>@*, @ViewBag.doctors, @ViewBag.doctors *@@*Name,NameHtml.DropDownList
+            </div>
+        }*@
+        <div>
+            <label></label>
+            <div>
+                <span></span>
+            </div>
+            <select asp-for="RequestedDate" onchange="onFormSelected(this.value)" asp-items="@(new SelectList(@ViewBag.Dates))"></select>  @*,"ID", "DateTime"*@@*onchange="onFormSelected(this.value)"*@@*, @ViewBag.Dates, @ViewBag.Dates, @ViewBag.Dates))"></select>*@
+        </div>
+        @*@{
+            int personnelNo;
+            //string personnel = Model.MedicalPersonnel;
+            //if (personnel != "None")
+            if (SelectList.ReferenceEquals(ViewBag.doctors, Model.MedicalPersonnel))
+                //if (Model.MedicalPersonnel != "None")
+            {
+                List<string> doctorList = ViewBag.doctors;
+            int listID = doctorList.Count();
+            //personnelNo = doctorList.IndexOf(personnel);
+            personnelNo = doctorList.IndexOf(Model.MedicalPersonnel);
+            int[] increments = ViewBag.values;
+            string[] times = ViewBag.times;
+            int id = 1;
+            //List<Times> timeID = new List<Times>();
+            List<string> timeID = new List<string>
+    ();
+            do
+            {
+                int min = increments[id];
+                int max = increments[id + 1];
+
+                //int j = 1;
+                for (int i = min; i <= max; i++)
+                {
+                    timeID.Add(times[i]);
+                    //Times time = new Times();
+                    //time.ID = j;
+                    //time.Time = times[i];
+                    //timeID.Add(time);
+                    //j++;
+                }
+            } while (id <= personnelNo);
+
+            ViewBag.time = timeID;
+        }
+        }
+
+        @{
+        List<string> times = new List<string>();
+        times = ViewBag.times;
+        List<Appointment> appointments = new List<Appointment>();
+        appointments = ViewBag.Appointments;
+        List<PatientAppointmentReferral> PAR = new List<PatientAppointmentReferral>();
+        PAR = ViewBag.PAR;
+        if(appointments.FirstOrDefault())
+        {
+
+        }
+
+
+    }*@
+        @*<div>
+        <label></label>
+        <div>
+            <span></span>
+        </div>
+        <select asp-for="RequestedTime" asp-items="@(new SelectList(@ViewBag.times))"></select>
+    </div>*@
+        <div class="form-group">
+            <label>Symptoms:</label>
+            <div>
+                <span asp-validation-for="Symptoms" class="text-danger"></span>
+            </div>
+            <textarea asp-for="Symptoms"></textarea>
+        </div>
+        </div>
+        <div class="col-md-3" style="background-color: white;">
+            <div class="form-group">
+                <label asp-for="StreetNumber"></label>
+                <div>
+                    <span asp-validation-for="StreetNumber" class="text-danger"></span>
+                </div>
+                <input type="number" asp-for="StreetNumber" />
+            </div>
+            <div class="form-group">
+                <label asp-for="StreetName"></label>
+                <div>
+                    <span asp-validation-for="StreetName" class="text-danger"></span>
+                </div>
+                <input type="text" asp-for="StreetName" />
+            </div>
+            <div class="form-group">
+                <label asp-for="County"></label>
+                <div>
+
+                </div>
+                <input type="text" asp-for="County" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Region"></label>
+                <div>
+                    <span asp-validation-for="Region" class="text-danger"></span>
+                </div>
+                <input type="text" asp-for="Region" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Postcode"></label>
+                <div>
+                    <span asp-validation-for="Postcode" class="text-danger"></span>
+                </div>
+                <input type="text" asp-for="Postcode" />
+            </div>
+        </div>
+        <div class="col-md-3" style="background-color: white;">
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <div>
+                    <span asp-validation-for="Email"></span>
+                </div>
+                <input type="email" asp-for="Email" />
+            </div>
+            <div class="form-group">
+                <label asp-for="HomePhone"></label>
+                <div>
+                    <span asp-validation-for="HomePhone"></span>
+                </div>
+                <input type="tel" asp-for="HomePhone" />
+            </div>
+            <div class="form-group">
+                <label asp-for="WorkPhone"></label>
+                <div>
+                    <span asp-validation-for="WorkPhone"></span>
+                </div>
+                <input type="tel" asp-for="WorkPhone" />
+            </div>
+            <div class="form-group">
+                <label asp-for="MobilePhone"></label>
+                <div>
+                    <span asp-validation-for="MobilePhone"></span>
+                </div>
+                <input type="tel" asp-for="MobilePhone" />
+            </div>
+            <div class="form-group">
+                <label asp-for="NextOfKin"></label>
+                <div>
+                    <span asp-validation-for="NextOfKin"></span>
+                </div>
+                <input type="text" asp-for="NextOfKin" />
+            </div>
+        </div>
+        @*<partial name="UsersPAR" />
+    <partial name="AddressPAR" />
+    <partial name="ContactDetailsPAR" />*@
+        <input type="submit" value="submit" />
+        @if (Model == null)
+        {
+            <a asp-action="Index" asp-area="" asp-controller="Appointment">Cancel</a>
+        }
+        else
+        {
+            <a asp-action="Index" asp-area="" asp-controller="Patient">Cancel</a>
+        }
+</form>
+</div>
+

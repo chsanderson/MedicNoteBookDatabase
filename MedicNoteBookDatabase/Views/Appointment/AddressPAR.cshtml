@@ -1,0 +1,45 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="col-md-3">
+    @model Address
+
+    <input type="hidden" asp-for="AddressID" />
+    <div class="form-group">
+        <label asp-for="StreetNumber"></label>
+        <div>
+            <span asp-validation-for="StreetNumber" class="text-danger"></span>
+        </div>
+        <input type="number" asp-for="StreetNumber" />
+    </div>
+    <div class="form-group">
+        <label asp-for="StreetName"></label>
+        <div>
+            <span asp-validation-for="StreetName" class="text-danger"></span>
+        </div>
+        <input type="text" asp-for="StreetName" />
+    </div>
+    <div class="form-group">
+        <label asp-for="County"></label>
+        <div>
+
+        </div>
+        <input type="text" asp-for="County" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Region"></label>
+        <div>
+            <span asp-validation-for="Region" class="text-danger"></span>
+        </div>
+        <input type="text" asp-for="Region" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Postcode"></label>
+        <div>
+            <span asp-validation-for="Postcode" class="text-danger"></span>
+        </div>
+        <input type="text" asp-for="Postcode" />
+    </div>
+</div>

@@ -1,0 +1,50 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<Appointment>
+<div>
+    <div>
+        <form asp-action="Appointment" method="post">
+            <label>Name: </label>
+            <input type="text" id="name" name="name"/>
+            <input type="submit" value="submit" />
+        </form>
+    </div>
+    <table>
+        <tr>
+            <th>Appointment Date And Time</th>
+            <th>Symptoms</th>
+            <th>Diagnosis</th>
+            <th>Patient Name</th>
+            <th>Medical Professional</th>
+            <th>Appointment Type</th>
+            <th>Date of Birth</th>
+            <th>Street Number</th>
+            <th>Street Name</th>
+            <th>County</th>
+            <th>Region</th>
+            <th>Postcode</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+        <tr>
+            @*<th>@item.AppointmentDateTime</th>*@
+            <th>@item.AppointmentDate</th>
+            <th>@item.AppointmentTime</th>
+            <th>@item.Symptoms</th>
+            <th>@item.Diagnosis</th>
+            <th>@item.PatientFullName</th>
+            <th>@item.AppointmentMedicalProfessional</th>
+            <th>@item.AppointmentType</th>
+            <th>@item.DOB</th>
+            <th>@item.StreetNumber</th>
+            <th>@item.StreetName</th>
+            <th>@item.County</th>
+            <th>@item.Region</th>
+            <th>@item.Postcode</th>
+        </tr>
+        }
+    </table>
+</div>

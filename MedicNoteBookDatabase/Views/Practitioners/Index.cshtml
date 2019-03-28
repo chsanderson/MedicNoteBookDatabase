@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Practitioner HomePage";
+    Layout = "../Shared/_LayoutUser.cshtml";
+}
+<div>
+    <div>
+        <form method="post" asp-action="CreateAppointment" asp-controller="Appointment" asp-area="">
+            <input type="hidden" name="MedicalPersonnel" id="MedicalPersonnel" value="@Context.Session.GetString("Name")" />
+            <button type="submit" style="border: 1px solid black; border-spacing: 15px; height:250px; background-color: white;" class="col-md-5">
+                <h2>Create Appointment</h2>
+                <p>You can create an appointment</p>
+            </button>
+        </form>
+    </div>
+    
+    <div class="col-md-1"></div>
+     <div>
+        <a asp-action="SearchAll" asp-controller="Practitioners" asp-area="">
+            <div style="border: 1px solid black; border-spacing: 15px; height:250px; background-color: white;" class="col-md-5">
+                <h2 class="text-center" style="text-align: center">All Appointments</h2>
+                <p class="text-center" style="text-align: center">Check All Appointments</p>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+
+
+@*@*<form method="get"*@ @*<a asp-action="Search" asp-controller="Appointment" asp-area="">*@
+@*<input type="hidden" name="Name" id="Name" value="@Context.Session.GetString("Name")" />
+    <input type="hidden" name="DOB" id="DOB" value="19/6/2018" />
+    <button type="submit">*@
+@*<div>
+        <h2>Search</h2>
+        <p>Check Guest Appointments made</p>
+    </div>*@
+@*</button>*@
+@*@*</a>*@@*form>*@
+@*<form method="get" asp-action="PatientAppointmentReferral" asp-controller="Patient" asp-area="">
+        <input type="hidden" name="MedicalPersonnel" id="MedicalPersonnel" value="@Context.Session.GetString("Name")" />
+        <input type="hidden" name="DOB" id="DOB" value="19/6/2018" />
+        <button type="submit">
+            <div>
+                <h2>Search</h2>
+                <p>Check appointments made</p>
+            </div>
+        </button>
+    </form>*@

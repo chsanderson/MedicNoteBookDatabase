@@ -1,0 +1,41 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IPatientAppointmentReferralRepository
+<div>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Symptoms</th>
+            <th>Decision</th>
+            <th>Current Date</th>
+            <th>Requested Date</th>
+            <th>Requested Time</th>
+            <th>Street Number</th>
+            <th>Street Name</th>
+            <th>Region</th>
+            <th>Postcode</th>
+            <th>DOB</th>
+            <th>County</th>
+        </tr>
+        @foreach (var appointment in Model.PAR)
+        {
+        <tr>
+            <td>@appointment.Name</td>
+            <td>@appointment.Symptoms</td>
+            <td>@appointment.Decision</td>
+            <td>@appointment.CurrentDate</td>
+            <td>@appointment.RequestedDate</td>
+            <td>@appointment.RequestedTime</td>
+            <td>@appointment.StreetNumber</td>
+            <td>@appointment.StreetName</td>
+            <td>@appointment.Region</td>
+            <td>@appointment.Postcode</td>
+            <td>@appointment.DOB</td>
+            <td>@appointment.County</td>
+        </tr>
+    }
+    </table>
+</div>

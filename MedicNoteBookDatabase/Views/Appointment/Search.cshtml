@@ -1,0 +1,153 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@*@model IEnumerable<PatientAppointmentReferral>
+    @model IEnumerable<Appointment>*@
+@{
+    ViewData["Title"] = "Guest Appointment";
+    if (Context.Session.GetString("Name") != null)
+    {
+        Layout = "_LayoutUser";
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
+}
+@model IEnumerable<PatientAppointmentReferral>
+@{
+    //ISession session = new ISession;
+    //Account account = Sessions.getJson<Account>(session, "Account");
+
+    //if (account == null)
+    //{
+
+    //}
+    }
+<div>
+    @* @Html.Partial("SearchLatestPARByName")*@
+    @*<@partial view>
+
+        </@partial>*@
+    <div>
+        <div>
+            <h3>Recent Appointment</h3>
+        </div>
+        @*<form asp-action="Search" method="post">
+                <label>Name: </label>
+                <input type="text" id="name" name="name" />
+                @* />asp-for="Name"
+                <input type="submit" value="submit" />
+            </form>*@
+    </div>
+    <table class="table-sm">
+        <tr>
+            <th class="text-left" @*colspan="3" *@>Name</th>
+
+            <th class="text-left" @*colspan="3" *@>Symptoms</th>
+
+            <th class="text-left" @*colspan="3" *@>Decision</th>
+
+            @*<th class="text-left" @*colspan="3">Current Date</th>*@
+
+            <th class="text-left" @*colspan="3" *@>Requested Date</th>
+
+            <th class="text-left" @*colspan="3" *@>Requested Time</th>
+
+            <th class="text-left" @*colspan="3" *@>Address</th>
+
+            @*Street Number<th class="text-left" @*colspan="3">Street Name</th>*@
+
+            <th class="text-left" @*colspan="3" *@>Region</th>
+
+            <th class="text-left" @*colspan="3" *@>Postcode</th>
+
+            @*<th class="text-left" @*colspan="3">DOB</th>
+
+            <th class="text-left" @*colspan="3">County</th>
+
+            <th class="text-left" @*colspan="3">Email</th>
+
+            @*<th class="text-left" @*colspan="3">Home Phone</th>
+
+            <th class="text-left" @*colspan="3">Work Phone</th>
+
+            <th class="text-left" @*colspan="3">Mobile Phone</th>
+
+            <th class="text-left" @*colspan="3">Next Of Kin</th>*@
+
+            <th class="text-right" @*colspan="3" *@>Actions</th>
+        </tr>
+       @{//@if(Model.Count() > 0)
+        }
+        @foreach (var item in Model)
+        {
+        <tr></tr>
+        <tr>
+            <td class="text-left" @*colspan="3" rowspan="2" *@>@item.Name</td>
+
+            <td class="text-left" @*colspan="3" rowspan="2" *@>@item.Symptoms</td>
+
+            <td class="text-left" @*colspan="3" rowspan="2" *@>@item.Decision</td>
+
+            @*<td class="text-left" @*colspan="3" rowspan="2">@item.CurrentDate.Date.ToShortDateString()</td>*@
+
+            <td class="text-left" @*colspan="3" rowspan="2" *@>@item.RequestedDate.Date.ToShortDateString()</td>
+
+            <td class="text-left" @*colspan="3" rowspan="2" *@>@item.RequestedTime</td>
+
+            <td class="text-left" @*colspan="3" rowspan="2" *@>@item.StreetNumber @item.StreetName</td>
+
+            @*<td class="text-left" @*colspan="3" rowspan="2">@item.StreetName</td>*@
+
+            <td class="text-left" @*colspan="3" rowspan="2" *@>@item.Region</td>
+
+            <td class="text-left" @*colspan="3" rowspan="2" *@>@item.Postcode</td>
+
+            @*<td class="text-left" @*colspan="3" rowspan="2">@item.DOB.Date.ToShortDateString()</td>
+
+            <td class="text-left" @*colspan="3" rowspan="2">@item.County</td>
+
+            <td class="text-left" @*colspan="6" rowspan="2">@item.Email</td>
+
+            <td class="text-left" @*colspan="3" rowspan="2">@item.HomePhone</td>
+
+            <td class="text-left" @*colspan="3" rowspan="2">@item.WorkPhone</td>
+
+            <td class="text-left" @*colspan="3" rowspan="2">@item.MobilePhone</td>
+
+            <td class="text-left" @*colspan="3" rowspan="2">@item.NextOfKin</td>*@
+
+            <td class="text-right" @*colspan="3" rowspan="2" *@>
+                <a asp-action="EditAppointment" class="btn btn-sm btn-default" asp-route-ID="@item.PatientApplicationReferralID">Edit</a>
+                <a asp-action="DeleteAppointment" class="btn btn-sm btn-danger" asp-route-ID="@item.PatientApplicationReferralID">Delete</a>
+            </td>
+
+            @*}}*@
+            @*@if (Context.Session.GetString("Type") == "Doctor" || Context.Session.GetString("Type") == "Nurse" || Context.Session.GetString("Type") == "Nurse" || Context.Session.GetString("Type") == "Patient")
+        {
+            <a asp-action="CreateAppointment" asp-controller="Appointment" asp-area="" class="btn btn-sm btn-default" asp-route-ID="@item.PatientApplicationReferralID">Create Appointment</a>
+            @*<a asp-action="AppointmentConfirm" asp-controller="Practitioners" asp-area="" class="btn btn-sm btn-default" asp-route-ID="@item.PatientApplicationReferralID">Create Appointment</a>*@
+            @*}*@
+            @*<a asp-action="Search" class="btn btn-sm" asp-route-ID="@item.Name">Search</a>
+                        <form asp-action="EditAppointment" method="get">
+            <input type="hidden" asp-for="@item.PatientApplicationReferralID" />
+            <input type="submit" value="Edit" />
+        </form>
+        <form asp-action="DeleteAppointment" method="get">
+            <input type="hidden" asp-for="@item.PatientApplicationReferralID" />
+            <input type="submit" value="Delete" />
+        </form>*@
+        </tr>
+            }
+        @{  //}
+            //}
+        //}
+        }
+    </table>
+    @if (Context.Session.GetString("Type") == "Doctor" || Context.Session.GetString("Type") == "Nurse" || Context.Session.GetString("Type") == "Nurse" || Context.Session.GetString("Type") == "Patient")
+    {
+        <a asp-action="CreateAppointment" asp-controller="Appointment" asp-area="" class="btn btn-sm btn-default" @*asp-route-ID="@item.PatientApplicationReferralID" *@>Create Appointment</a>
+        @*<a asp-action="AppointmentConfirm" asp-controller="Practitioners" asp-area="" class="btn btn-sm btn-default" asp-route-ID="@item.PatientApplicationReferralID">Create Appointment</a>*@
+    }
+</div>

@@ -1,0 +1,135 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@*@model IEnumerable<PatientAppointmentReferral>*@
+@{
+    ViewData["Title"] = "Latest Appointment Made";
+    if (Context.Session.GetString("Name") != "" || Context.Session.GetString("Name") != null)
+    {
+        Layout = "../Shared/_LayoutUser.cshtml";
+    }
+    else
+    {
+        Layout = "_Layout.cshtml";
+    }
+}
+@model IEnumerable<Appointment>
+<div>
+    <div>
+        <h2>My Appointment</h2>
+    </div>
+    <table>
+        <tr>
+            <th>Appointment Date and Time</th>
+            <th>Symptoms</th>
+            <th>Diagnosis</th>
+            <th>Patient Name</th>
+            <th>Medical Professional</th>
+            <th>Appointment Type</th>
+            <th>Date of Birth</th>
+            <th>Street Number</th>
+            <th>Street Name</th>
+            <th>County</th>
+            <th>Region</th>
+            <th>Postcode</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.AppointmentDate</td>
+                <td>@item.Symptoms</td>
+                <td>@item.Diagnosis</td>
+                <td>@item.PatientFullName</td>
+                <td>@item.AppointmentMedicalProfessional</td>
+                <td>@item.AppointmentType</td>
+                <td>@item.DOB.Date.ToShortDateString()</td>
+                <td>@item.StreetNumber</td>
+                <td>@item.StreetName</td>
+                <td>@item.County</td>
+                <td>@item.Region</td>
+                <td>@item.Postcode</td>
+                <td>
+                    <a asp-action="EditAppointment" asp-controller="Patient" class="btn btn sm btn-default" asp-route-ID="@item.AppointmentID">Edit</a>
+                    <a asp-action="DeleteAppointment" asp-controller="Patient" class="btn btn-sm btn-danger" asp-route-ID="@item.AppointmentID">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+@*<h2>My Patient Appointment Referrals Made</h2>
+    </div>
+    <table class="table-sm">
+        <tr>
+            <th class="text-center" colspan="2">Name</th>
+
+            <th class="text-center" colspan="2">Symptoms</th>
+
+            <th class="text-center" colspan="2">Decision</th>
+
+            <th class="text-center" colspan="2">Current Date</th>
+
+            <th class="text-center" colspan="2">Requested Date</th>
+
+            <th class="text-center" colspan="2">Requested Time</th>
+
+            <th class="text-center" colspan="2">Street Number</th>
+
+            <th class="text-center" colspan="2">Street Name</th>
+
+            <th class="text-center" colspan="2">Region</th>
+
+            <th class="text-center" colspan="2">Postcode</th>
+
+            <th class="text-center" colspan="2">DOB</th>
+
+            <th class="text-center" colspan="2">County</th>
+
+            <th class="text-center" colspan="2">Email</th>
+
+            <th class="text-center" colspan="2">Home Phone</th>
+
+            <th class="text-center" colspan="2">Work Phone</th>
+
+            <th class="text-center" colspan="2">Mobile Phone</th>
+
+            <th class="text-center" colspan="2">Next Of Kin</th>
+
+            <th class="text-right" colspan="2">Actions</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center" colspan="2">@item.Name</td>
+
+                <td class="text-center" colspan="2">@item.Symptoms</td>
+
+                <td class="text-center" colspan="2">@item.Decision</td>
+
+                <td class="text-center" colspan="2">@item.CurrentDate.Date.ToShortDateString()</td>
+
+                <td class="text-center" colspan="2">@item.RequestedDate.Date.ToShortDateString()</td>
+
+                <td class="text-center" colspan="2">@item.RequestedTime</td>
+
+                <td class="text-center" colspan="2">@item.StreetNumber</td>
+
+                <td class="text-center" colspan="2">@item.StreetName</td>
+
+                <td class="text-center" colspan="2">@item.Region</td>
+
+                <td class="text-center" colspan="2">@item.Postcode</td>
+
+                <td class="text-center" colspan="2">@item.DOB.Date.ToShortDateString()</td>
+
+                <td class="text-center" colspan="2">@item.County</td>
+
+                <td class="text-center" colspan="2">@item.Email</td>
+
+                <td class="text-center" colspan="2">@item.HomePhone</td>
+
+                <td class="text-center" colspan="2">@item.WorkPhone</td>
+
+                <td class="text-center" colspan="2">@item.MobilePhone</td>
+
+                <td class="text-center" colspan="2">@item.NextOfKin</td>*@
+

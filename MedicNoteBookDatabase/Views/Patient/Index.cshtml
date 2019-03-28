@@ -1,0 +1,110 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    ViewData["Title"] = "Patient Homepage";
+    Layout = "_LayoutUser";
+}
+@model Account
+<div>
+    <div>
+        @*<a></a>*@<form method="post" asp-controller="Appointment" asp-action="CreateAppointment">
+                       <div style="border: 1px solid black; border-spacing: 30px; height: 250px; background-color: white;@*lightblue;*@" class="col-md-5">
+                           @*class="col-md-4"style="background-color: lightblue;">*@
+                           <h3>Create Appointment</h3>
+                           <p>Click Here to create a request for an appointment</p>
+                           @*<select asp-for="MedicalPersonnel"></select>*@
+                           @if (Model.MedicalPersonnel == null)
+                           {
+                               <input type="text" id="MedicalPersonnel" name="MedicalPersonnel" asp-for="MedicalPersonnel" readonly="readonly" value="New Doctor"/>@*asp-for="MedicalPersonnel" />*@
+                           }
+                           else
+                           {
+                               <input type="text" id="MedicalPersonnel" name="MedicalPersonnel" asp-for="MedicalPersonnel" readonly="readonly" />@*asp-for="MedicalPersonnel" />*@
+                           }
+                           <input type="submit" />
+                       </div>
+        </form>
+    </div>
+
+    <div class="md-col-1"></div>
+    <div>
+        <form method="post" asp-controller="Patient" asp-action="Appointments">
+            @*<input type="hidden" id="ID" name="ID" asp-for="ID" readonly="readonly" />
+                <input type="hidden" id="Name" name="Name" asp-for="Name" readonly="readonly" />
+                <input type="hidden" id="DOB" name="DOB" asp-for="DOB" readonly="readonly" />*@
+            <button type="submit" style="border: 1px solid black; border-spacing: 15px; height: 250px; background-color: white; @*lightblue;*@" class="col-md-5">
+                <h3>Appointment Referrals</h3>
+                <p>Click here to check your previous requests for appointments</p>
+            </button>
+        </form>
+    </div>
+    <div>
+        <form method="post" asp-controller="Patient" asp-action="PatientAppointmentReferral">
+            <input type="hidden" id="ID" name="ID" asp-for="ID" readonly="readonly" />
+            <input type="hidden" id="Name" name="Name" asp-for="Name" readonly="readonly" />
+            <input type="hidden" id="DOB" name="DOB" asp-for="DOB" readonly="readonly" />
+            <button type="submit" style="border: 1px solid black; border-spacing: 15px; height: 250px; background-color: white;@*lightblue;*@" class="col-md-5">
+                <h3>Appointments</h3>
+                <p>Click here to check your appointments</p>
+            </button>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+@*<a>
+    <form method="post" asp-controller="Appointment" asp-action="Search">
+        <input type="hidden" asp-for="Name" readonly="readonly" />
+        <input type="hidden" asp-for="DOB" readonly="readonly" />
+        <button type="submit" style="border: 1px solid black; border-spacing: 15px; height: 250px; background-color: lightblue;" class="col-md-5">
+            @*<a asp-controller="Appointment" asp-action="Search">*@
+@*<div style="border: 1px solid black; border-spacing: 15px; height: 250px; background-color: lightblue;" class="col-md-5">*@
+@*class="col-md-4"  style="@*background-color: lightblue;">border-spacing: 15px;">
+    <h3>Search Appointment</h3>
+    <p>Click Here to view your recent Request for appointment</p>*@
+@*</div>
+            </button>
+        </form>
+    </a>*@
+@*<a asp-controller="Patient" asp-action="MedicalHistory">
+    <div style="border: 1px solid black; border-spacing: 15px; height: 250px; background-color: lightblue;" class="col-md-5">
+        @*class="col-md-3">*@
+@* <h3>Medical History</h3>
+            <p>Click Here to view your medical History</p>
+        </div>
+    </a>*@
+@*<div>
+    <div style="border: 1px solid black; border-spacing: 30px; height: 250px; background-color: lightblue;" class="col-md-5">
+        <a asp-area="" asp-controller="Appointment" asp-action="CreateAppointment">
+            @*class="col-md-4"style="background-color: lightblue;">*@
+@*<h3>Create Appointment</h3>
+        </a>
+    </div>
+    <a asp-area="" asp-controller="Appointment" asp-action="Search">
+        <div style="border: 1px solid black; border-spacing: 15px; height: 250px; background-color: lightblue;" class="col-md-5">
+*@
+@*class="col-md-4"  style="@*background-color: lightblue;">border-spacing: 15px;">*@
+@*<h3>Search Appointment</h3>
+
+            </div>
+        </a>
+    <div style="border: 1px solid black; border-spacing: 15px; height: 250px; background-color: lightblue;" class="col-md-5">
+*@@*class="col-md-3">*@
+@*<a asp-area="" asp-controller="Patient" asp-action="MedicalHistory">
+        <h3>Medical History</h3>
+    </a>
+    </div>
+
+    </div>*@

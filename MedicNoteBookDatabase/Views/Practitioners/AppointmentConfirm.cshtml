@@ -1,0 +1,104 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Appointment
+<div>
+    <form method="post" asp-action="AppointmentConfirm" asp-controller="Practitioners" asp-area="">
+        <div class="form-group">
+            <label>Appointment Date:</label>
+            <div>
+                <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+            </div>
+            <input type="date" asp-for="AppointmentDate" readonly="readonly" />
+        </div>
+        <div class="form-group">
+            <label>Appointment Time:</label>
+            <div>
+                <span asp-validation-for="AppointmentTime" class="text-danger"></span>
+            </div>
+            <input type="time" asp-for="AppointmentTime" readonly="readonly" />
+        </div>
+        <div class="form-group">
+            <label>Diagnosis: </label>
+            <div>
+                <span asp-validation-for="Diagnosis" class="text-danger"></span>
+            </div>
+            <input type="text" asp-for="Diagnosis" readonly="readonly" />
+        </div>
+        <div class="form-group">
+            <label>Appointment Type: </label>
+            <div>
+                <span asp-validation-for="AppointmentType" class="text-danger"></span>
+            </div>
+            <input type="text" asp-for="AppointmentType" readonly="readonly" />
+        </div>
+        <div class="form-group">
+            <label>Medical Practitioner: </label>
+            <div>
+                <span asp-validation-for="AppointmentMedicalProfessional" class="text-danger"></span>
+            </div>
+            <input type="text" asp-for="AppointmentMedicalProfessional" readonly="readonly" />
+        </div>
+        <div class="form-group">
+            <label>Symptoms: </label>
+            <div>
+                <span asp-validation-for="Symptoms"></span>
+            </div>
+            <input type="text" asp-for="Symptoms" readonly="readonly" />
+        </div>
+        <div class="form-group">
+            <label>Patient Name: </label>
+            <div>
+                <span asp-validation-for="PatientFullName" class="text-danger"></span>
+            </div>
+            <input type="datetime" asp-for="PatientFullName" readonly="readonly" />
+        </div>
+        <div class="form-group">
+            <label>Patient Date of Birth: </label>
+            <div>
+                <span asp-validation-for="DOB" class="text-danger"></span>
+            </div>
+            <input type="datetime" asp-for="DOB" readonly="readonly" />
+        </div>
+        <input type="hidden" asp-for="UserReferralID" />
+        <div class="form-group">
+            <label>Street Number: </label>
+            <div>
+                <span asp-validation-for="StreetNumber" class="text-danger"></span>
+            </div>
+            <input type="number" asp-for="StreetNumber" readonly="readonly" />
+        </div>
+        <div class="form-group">
+            <label>Street Name: </label>
+            <div>
+                <span asp-validation-for="StreetName" class="text-danger"></span>
+            </div>
+            <input type="text" asp-for="StreetName" readonly="readonly" />
+        </div>
+        <div class="form-group">
+            <label>County: </label>
+            <div>
+                <span asp-validation-for="County" class="text-danger"></span>
+            </div>
+            <input type="text" asp-for="County" readonly="readonly" />
+        </div>
+        <div class="form-group">
+            <label>Region: </label>
+            <div>
+                <span asp-validation-for="Region" class="text-danger"></span>
+            </div>
+            <input type="text" asp-for="Region" readonly="readonly" />
+        </div>
+        <div class="form-group">
+            <label>Postcode: </label>
+            <div>
+                <span asp-validation-for="Postcode" class="text-danger"></span>
+            </div>
+            <input type="text" asp-for="Postcode" readonly="readonly" />
+        </div>
+        <input type="submit" />
+    </form>
+    <a asp-action="Search" asp-controller="Appointment" asp-area="" class="btn btn-sm btn-warning">Cancel</a>
+</div>

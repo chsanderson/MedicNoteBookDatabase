@@ -1,0 +1,43 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    ViewData["Title"] = "Appointment Homepage";
+}
+@model PatientAppointmentReferral
+<div>
+    <div style="border: 1px solid black; border-spacing: 30px; height: 250px; background-color: white;@*lightblue;*@" class="col-md-5">
+        <form method="post" asp-area="" asp-controller="Appointment" asp-action="CreateAppointment">
+            @*class="col-md-4"style="background-color: lightblue;">*@
+            <h3>Create Appointment</h3>
+            <p>Create a request for an appointment</p>
+            <select asp-for="MedicalPersonnel" onchange="onFormSelected(this.value)" asp-items="@(new SelectList(@ViewBag.doctors))"></select>@*Name,NameHtml.DropDownList*@
+            <input type="submit" />
+        </form>
+    </div>
+    <div class="col-md-1" style="height:250px; background-color: white;"></div>
+    <div style="border: 1px solid black; border-spacing: 15px; height: 250px; background-color: white;@*lightblue;*@" class="col-md-5">
+        <h3>Search Appointment</h3>
+        <p>Check your status of your recent appointment request by entering your name and date of birth</p>
+        <form method="post" asp-action="Search" asp-controller="Appointment">
+            @*<a asp-area="" asp-controller="Appointment" asp-action="Search">*@
+            @*class="col-md-4"  style="@*background-color: lightblue;">border-spacing: 15px;">value="@(new DateTime(1980,6,25))"*@
+            <a>Name: </a><input type="text" id="Name" name="Name" value="Julie Doe" /><br />
+            <a>Date Of Birth</a><input type="date" id="DOB" name="DOB" /><br />
+            <button type="submit">Search</button>
+            <button type="reset">Clear</button>
+            @* </a> *@
+        </form>
+    </div>
+</div>
+
+
+
+
+    @*<div style="border: 1px solid black; border-spacing: 15px; height: 250px; background-color: lightblue;" class="col-md-5">
+            <a asp-area="" asp-controller="Appointment" asp-action="Search">
+                        @*class="col-md-4"  style="@*background-color: lightblue;">border-spacing: 15px;">
+                <h3>Search Appointment</h3>
+                </a>
+    </div>*@
