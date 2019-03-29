@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿//Christopher Sanderson
+//MedicNoteBook
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,6 +11,7 @@ namespace MedicNoteBookDatabase.Models
 {
     public class Address
     {
+        //this defines the string variables that will form the Address Model
         [BindNever]
         [Key]
         public int AddressID { get; set; }

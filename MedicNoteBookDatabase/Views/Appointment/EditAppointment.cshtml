@@ -2,16 +2,12 @@
     ViewData["Title"] = "Edit Appointment";
 }
 @model PatientAppointmentReferral
-    @*IEnumerable<PatientAppointmentReferral>*@
 
 <div>
     <form asp-action="EditAppointment" method="post">
         <h2>Edit Appointment</h2>
         <input type="hidden" asp-for="PatientApplicationReferralID" />
         <input type="hidden" asp-for="CurrentDate" />
-        @*<input type="hidden" asp-for="Decision" />*@
-        @*@foreach(var item in Model)
-        {*@
         <div class="col-md-4">
             <div class="form-group">
                 <label>Name: </label>
@@ -26,9 +22,9 @@
                     <span asp-validation-for="RequestedDate" class="text-danger"></span>
                 </div>
                 <select asp-for="RequestedDate" onchange="onFormSelected(this.value)" asp-items="@(new SelectList(@ViewBag.Dates))"></select>
-                @*<input type="date" asp-for="RequestedDate" />*@
+                
             </div>
-            @if (@*Context.Session.GetString("Type") != null &&*@ Context.Session.GetString("Type") == "Doctor" || Context.Session.GetString("Type") == "Nurse")
+            @if (Context.Session.GetString("Type") == "Doctor" || Context.Session.GetString("Type") == "Nurse")
             {
                 <div>
                     <label>Decision: </label>
@@ -42,20 +38,12 @@
             {
                 <input type="hidden" asp-for="Decision" />
             }
-            @*<div class="form-group">
-                <label>Requested Time: </label>
-                <div>
-                    <span asp-validation-for="RequestedTime" class="text-danger"></span>
-                </div>
-                <input type="time" asp-for="RequestedTime" />
-            </div>*@
             <div class="form-group">
                 <label>Symptoms: </label>
                 <div>
                     <span asp-validation-for="Symptoms" class="text-danger"></span>
                 </div>
                 <textarea asp-for="Symptoms" @*readonly="readonly"*@></textarea>
-                @*<input type="text" asp-for="Symptoms" />*@
             </div>
             <div class="form-group">
                 <label>DOB: </label>
@@ -139,12 +127,10 @@
             </div>
         </div>
         <input type="submit" value="submit" />
-        @* }*@
     </form>
     <form asp-action="Search" asp-area="" asp-controller="Appointment" method="post">
         <input type="hidden" asp-for="Name" id="Name" name="Name"/>
         <input type="hidden" asp-for="DOB" id="DOB" name="DOB"/>
         <button type="submit">Cancel</button>
-        @*<a asp-action="Search" asp-area="" asp-controller="Appointment">Cancel</a>*@
     </form>
         </div>

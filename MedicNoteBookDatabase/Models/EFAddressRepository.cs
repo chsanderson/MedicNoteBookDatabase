@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Christopher Sanderson
+//MedicNoteBook
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,13 +17,14 @@ namespace MedicNoteBookDatabase.Models
         }
 
         public IQueryable<Address> address => context.Address;
-
+        /*
         public void SaveAddress(int id, Address address)
         {
 
-        }
+        }*/
 
-        public /*void*/int CreateAddress(Address addressDetails)
+        //this creates a record in the address table of the MedicNoteBook database and returns the latest record's id
+        public int CreateAddress(Address addressDetails)
         {
             context.Address.Add(addressDetails);
             context.SaveChanges();

@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Christopher Sanderson
+//MedicNoteBook
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,10 +12,11 @@ namespace MedicNoteBookDatabase.Models
 {
     public class EFAccountRepository: IAccountRepository
     {
+
         private ApplicationDBContext DBcontext;
         private IRoleRepository roleRepository;
         //private IDataProtector _protector;
-        private IDataProtectionService protectionService;
+        //private IDataProtectionService protectionService;
 
         public EFAccountRepository(ApplicationDBContext context, IRoleRepository roleRepo, IDataProtectionProvider provider)
         {//, IDataProtectionProvider provider)
@@ -23,9 +26,11 @@ namespace MedicNoteBookDatabase.Models
             //_protector = provider.CreateProtector("key-d3431142-2392-4951-a994-125bf74c8d2b");
         }
 
+        //
         public IQueryable<Account> Accounts => DBcontext.Account;
 
-        public void /*int*/ SaveAccount(Account account)
+        //this saves the account to the database
+        public void SaveAccount(Account account)
         {
             if (Accounts.Contains(account) == false)
             {
@@ -35,6 +40,7 @@ namespace MedicNoteBookDatabase.Models
             //return account.ID;
         }
 
+        //this is a method that updates the account when created to add the address and ContactDetails' ids
         public void SetUpAccount(int id, Account account, int ContactDetailsID, int AddressID)
         {
             //if(Accounts.Where(a => a.ID == account.ID))
@@ -52,10 +58,10 @@ namespace MedicNoteBookDatabase.Models
             //}
             DBcontext.SaveChanges();
         }
-/*IDataProtector _protector,*/
-        public string validateLogin(string username, string password, string passwordAlt)//(Login login)
-        {/*bool
-            bool*/
+
+        //this vlaidates the user whether they have encrypted, hashed or normal records displayed in the database and returns the username as a string variable
+        public string validateLogin(string username, string password, string passwordAlt)
+        {
             string validateUser = " ";
             //Account validate = DBcontext.Account.FirstOrDefault(a => a.Username == username);
             string[] passwords = new string[Accounts.Count()];
@@ -73,7 +79,10 @@ namespace MedicNoteBookDatabase.Models
             {
                 try
                 {
+                    //this creates the string variable comparer
                     StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+
+                    //this checks
                     var user = Encrypted.decrypt(usernames[i].ToString()).ToString();//protectionService.UnProtect(usernames[i]);/*protectionService.UnProtect(usernames[i])*/ 
                     if (user == username)
                     {
@@ -103,7 +112,7 @@ namespace MedicNoteBookDatabase.Models
                     }
                 }
                 i++;
-            } while (/*validateUser == " " ||*/ i < count);/*false*/
+            } while (i < count);
             validateUser = " ";
             Account validate = DBcontext.Account.FirstOrDefault(a => a.Username == username);
             //Account validate = DBcontext.Account.FirstOrDefault(a => Encrypted.decrypt(a.Username) == username);//_protector.Unprotect()
@@ -127,57 +136,20 @@ namespace MedicNoteBookDatabase.Models
             return validateUser;
         }
 
-        public /*int[]*/ /*void*/ int[] getID(string username, string password)//(Login login)
+        //this returns an int array that contains the ID for the Account, Address and ContactDetails record
+        public int[] getID(string username, string password)//(Login login)
         {
             int[] validateUser = new int[3];
             Account validate = DBcontext.Account.FirstOrDefault(a => a.Username == username);
-            //if (validate.Password == password)//if(validate.Password.Equals(login.Password))
-            //{
                 validateUser[0] = validate.ID;
                 validateUser[1] = validate.AddressID;
                 validateUser[2] = validate.ContactID;
-                //Account accounts = new Account();
-                //accounts.ID = validate.ID;
-                //accounts.Name = validate.Name;
-                //accounts.Username = username;
-                //accounts.AddressID = validate.AddressID;
-                //accounts.ContactID = validate.ContactID;
-                //accounts.DOB = validate.DOB;
-                //accounts.CHINumber = validate.CHINumber;
-
-                //ContactDetails CD = DBcontext.ContactDetails.FirstOrDefault(c => c.ContactDetailsID == accounts.ContactID);
-                //ContactDetails contactDetails = new ContactDetails();
-                //contactDetails.ContactDetailsID = CD.ContactDetailsID;
-                //contactDetails.Email = CD.Email;
-                //contactDetails.HomePhone = CD.HomePhone;
-                //contactDetails.MobilePhone = CD.MobilePhone;
-                //contactDetails.WorkPhone = CD.WorkPhone;
-                //contactDetails.NextOfKin = CD.NextOfKin;
-
-                //Address AddressDetails = DBcontext.Address.FirstOrDefault(a => a.AddressID == accounts.AddressID);
-                //Address address = new Address();
-                //address.AddressID = AddressDetails.AddressID;
-                //address.County = AddressDetails.County;
-                //address.StreetNumber = AddressDetails.StreetNumber;
-                //address.StreetName = AddressDetails.StreetName;
-                //address.Region = AddressDetails.Region;
-                //address.Postcode = AddressDetails.Postcode;
-                //return validateUser;
-            //}
-            //else
-            /*{
-                validateUser[0] = 0;
-                validateUser[1] = 0;
-                validateUser[2] = 0;
-            }*/
             return validateUser;
         }
 
-        public void UpdateAccount(int id, Account account)
+        //this will be used at a later date to update the account information
+        /*public void UpdateAccount(int id, Account account)
         {
-            //if(Accounts.Where(a => a.ID == account.ID))
-            //{
-
             Account details = DBcontext.Account.FirstOrDefault(a => a.ID == id);
             details.Name = account.Name;
             details.Password = account.Password;
@@ -186,19 +158,20 @@ namespace MedicNoteBookDatabase.Models
             details.AddressID = account.AddressID;
             details.ContactID = account.ContactID;
             details.CHINumber = account.CHINumber;
-            //}
             DBcontext.SaveChanges();
         }
-
-        public void DeleteAccount(Account account)
+        */
+        //this deletes the account although this will be used at a later date
+        /*public void DeleteAccount(Account account)
         {
             if(Accounts.Contains(account) == true)
             {
                 DBcontext.Account.Remove(account);
             }
             DBcontext.SaveChanges();
-        }
+        }*/
 
+        //this is an older instance of returning the account ID
         //public int getID(Account account)
         //{
         //    int i = DBcontext.Account.Count();

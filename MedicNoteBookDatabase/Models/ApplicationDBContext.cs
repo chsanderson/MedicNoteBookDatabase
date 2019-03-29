@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Christopher Sanderson
+//MedicNoteBook
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +12,7 @@ namespace MedicNoteBookDatabase.Models
 {
     public class ApplicationDBContext : DbContext 
     {
+        //this creates a databaseSet for each of the tables referenced in the database and connects to the MedicNoteBook Database
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options) { }
 
         public DbSet<Account> Account { get; set; }

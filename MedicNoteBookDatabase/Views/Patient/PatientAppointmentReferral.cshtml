@@ -1,7 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@*@model IEnumerable<PatientAppointmentReferral>*@
+﻿@*@model IEnumerable<PatientAppointmentReferral>*@
 @{
     ViewData["Title"] = "Latest Appointment Made";
     if (Context.Session.GetString("Name") != "" || Context.Session.GetString("Name") != null)

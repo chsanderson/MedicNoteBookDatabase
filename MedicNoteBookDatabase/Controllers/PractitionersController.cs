@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Christopher Sanderson
+//MedicNoteBook
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,13 +23,12 @@ namespace MedicNoteBookDatabase.Controllers
         {
             appointmentRepository = appointmentRepo;
             patientAppointmentReferralRepository = PARrepo;
-            _protector = provider.CreateProtector("c90bab3c-8f97 -461b-af78-16fcfc574edb");//GetType().FullName);
-            //_protector = provider.CreateProtector(GetType().FullName);
-            //_protector = provider.CreateProtector("key-d3431142-2392-4951-a994-125bf74c8d2b");
+            _protector = provider.CreateProtector("c90bab3c-8f97 -461b-af78-16fcfc574edb");
         }
-
+        //this displays the pratitioners index view
         public IActionResult Index()
         {
+            //this checks if the account session is valid, if it is not then the user will be redirected to the home page
             Account account = new Account();
             account = HttpContext.Session.getJson<Account>("Account");
             if(account != null)
@@ -47,19 +48,23 @@ namespace MedicNoteBookDatabase.Controllers
             }
         }
 
+        //this displays all appointments for medical personnel if there areany ( guest apoointments and logged in appointments)
         public IActionResult SearchAll()
         {
+            //this checks if the account session is valid, if it is not then the user will be redirected to the home page or the log in page
             Account account = new Account();
             account = HttpContext.Session.getJson<Account>("Account");
             if(account != null)
-            { 
+            { //this checks if the user is authourized to see this view and redirects them to the appropriate page
                 if(account.RoleID == 3 || account.RoleID == 4 || account.RoleID == 6)
                 {
                     List<Appointment> appointments = new List<Appointment>();
                     appointments = appointmentRepository.ViewBagAppointments(account.Name);//.Appointment.Where(a => a.AppointmentDate >= DateTime.Now).Where(a => a.AppointmentMedicalProfessional == account.Name).ToList();
                     List<PatientAppointmentReferral> PAR = new List<PatientAppointmentReferral>();
                     PAR = patientAppointmentReferralRepository.ViewBagPAR(account.Name);//.PAR.Where(p => p.RequestedDate >= DateTime.Now).Where(p => p.MedicalPersonnel == account.Name).ToList();
-
+                    
+                    
+                    //this checks if their are any appointment made by guest users or logged in users and saves them to the appropriate ViewBag variable and returns the view
                     if(appointments.Count > 0)
                     {
                         ViewBag.Appointments = appointments;
@@ -110,12 +115,5 @@ namespace MedicNoteBookDatabase.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
-
-        //public ViewResult AppointmentConfirm(int userId)
-        //{
-        //    Appointment appointment = new Appointment();
-        //    PatientAppointmentReferral par = patientAppointmentReferralRepository.PAR;
-        //    return View();
-        //}
     }
 }

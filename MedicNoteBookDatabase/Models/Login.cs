@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿//Christopher Sanderson
+//MedicNoteBook
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -9,6 +11,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MedicNoteBookDatabase.Models
 {
+    //this contains the login view's details that will be checked against the records in the accounts table in the MedicNoteBook database
     public class Login
     {        
         [Required(ErrorMessage = "There has been an error with your username and/or password")]

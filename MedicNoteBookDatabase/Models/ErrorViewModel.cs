@@ -1,3 +1,5 @@
+//Christopher Sanderson
+//MedicNoteBook
 using System;
 
 namespace MedicNoteBookDatabase.Models

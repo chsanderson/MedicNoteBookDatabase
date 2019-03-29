@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Christopher Sanderson
+//MedicNoteBook
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,13 +19,6 @@ namespace MedicNoteBookDatabase.Models
 
         public IQueryable<PatientAppointmentReferral> PAR => context.PatientAppointmentReferral;
 
-        //public bool CreatePAR(PatientAppointmentReferral par)
-        //{
-        //    if(par.)
-        //    context.PatientAppointmentReferral.Add(par);
-        //    context.SaveChanges();
-        //    return true;
-        //}
 
         public void CreatePAR(PatientAppointmentReferral par)
         {
@@ -38,7 +33,7 @@ namespace MedicNoteBookDatabase.Models
             //}
             context.SaveChanges();
         }
-
+        /* early version of updatePAR
         public void SavePAR(PatientAppointmentReferral par)
         {
             //if (context.PatientAppointmentReferral.Contains(par))
@@ -46,15 +41,12 @@ namespace MedicNoteBookDatabase.Models
             //    context.PatientAppointmentReferral.Add(par);
             //}
         }
+        */
 
+            //this updates edited Guest Appointments
         public void UpdatePAR(PatientAppointmentReferral par)
         {
-            //    if(context.PatientAppointmentReferral.Find(id) != null)
-            //    {context.PatientAppointmentReferral.;
-            //context.PatientAppointmentReferral.FirstOrDefault(r => r.PatientApplicationReferralID == id);
-            PatientAppointmentReferral PARUpdate = context.PatientAppointmentReferral.FirstOrDefault(r => r.PatientApplicationReferralID == par.PatientApplicationReferralID);//id);
-            ////context.Update(par).;
-            //PARUpdate.PatientApplicationReferralID = par.PatientApplicationReferralID;
+            PatientAppointmentReferral PARUpdate = context.PatientAppointmentReferral.FirstOrDefault(r => r.PatientApplicationReferralID == par.PatientApplicationReferralID);
             PARUpdate.Name = par.Name;
             PARUpdate.RequestedDate = par.RequestedDate;
             PARUpdate.RequestedTime = par.RequestedTime;
@@ -69,21 +61,19 @@ namespace MedicNoteBookDatabase.Models
             PARUpdate.CurrentDate = par.CurrentDate;
 
             context.SaveChanges();
-               // context.PatientAppointmentReferral.
-                //context.PatientAppointmentReferral.Update(id).CurrentValues.;//.up;
-        //    }
         }
 
-        public void DeletePAR(/*int id, */PatientAppointmentReferral par)
+        //this deletes the record of the guest user's appointment
+        public void DeletePAR(PatientAppointmentReferral par)
         {
             if(context.PatientAppointmentReferral.Where(p => p.PatientApplicationReferralID == par.PatientApplicationReferralID) != null)//id) != null) 
             {
                 context.PatientAppointmentReferral.Remove(par);
                 context.SaveChanges();
-                //context.PatientAppointmentReferral.Remove(id).
             }
         }
 
+        //this returns a list of patientAppointmentReferral Models in the database
         public List<PatientAppointmentReferral> ViewBagPAR(string MedicalProfessional)
         {
             List<PatientAppointmentReferral> PAR = new List<PatientAppointmentReferral>();

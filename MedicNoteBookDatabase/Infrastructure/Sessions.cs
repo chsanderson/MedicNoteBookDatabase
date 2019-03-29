@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Christopher Sanderson
+//MedicNoteBook
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,21 +14,21 @@ namespace MedicNoteBookDatabase.Infrastructure
 {
     public static class Sessions
     {
-        //
+        //this allows sessions to be created that use a string as a key to store objects such as classes that can be used for various reasons
         public static void setJson(this ISession session, string key, object value)
         {
             session.SetString(key, JsonConvert.SerializeObject(value));
         }
 
-        //
+        //this allows sessions to be called and used at various sections of the web application
         public static T getJson<T>(this ISession session, string key)
         {
             var sessionData = session.GetString(key);
             return sessionData == null ? default(T) : JsonConvert.DeserializeObject<T>(sessionData);
         }
-        //public static List<DateTime>
-        //}
     }
+
+    //this class allows string variables to be encrypted and returned as a new string
     public static class Encrypted
     {
         public static string encrypt(string text)
@@ -54,6 +56,7 @@ namespace MedicNoteBookDatabase.Infrastructure
             }
         }
 
+        //this class allows encrypted strings to be decrypted and returned as the original string it had previously been
         public static string decrypt(string cipherText)
         {
             var fullCipher = Convert.FromBase64String(cipherText);

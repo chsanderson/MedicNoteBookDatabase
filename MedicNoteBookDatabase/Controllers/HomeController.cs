@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Christopher Sanderson
+//MedicNoteBook
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -12,6 +14,7 @@ namespace MedicNoteBookDatabase.Controllers
     {
         public IActionResult Index()
         {
+            //this redirects the user to the appointment index page
             return RedirectToAction("Index", "Appointment");
             //return View();
         }

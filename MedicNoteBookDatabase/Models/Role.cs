@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿//Christopher Sanderson
+//MedicNoteBook
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,6 +15,7 @@ namespace MedicNoteBookDatabase.Models
         [Key]
         public int ID { get; set; }
 
+        //this allows roles to be entered
         [Required(ErrorMessage = "Role must be entered")]
         [StringLength(10)]
         public string UserRole { get; set; }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿//Christopher Sanderson
+//MedicNoteBook
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,6 +19,7 @@ namespace MedicNoteBookDatabase.Models
 
         public IQueryable<Appointment> Appointment => context.Appointment;
 
+        //this edits the appointment details 
         public void SaveAppointment(int id, Appointment appointment)
         {
             Appointment editedAppointment = context.Appointment.FirstOrDefault(a => a.AppointmentID == id);
@@ -37,6 +41,7 @@ namespace MedicNoteBookDatabase.Models
             context.SaveChanges();
         }
 
+        //this creates an appointment for logged in users or for users who have accounts in the database
         public void CreateAppointment(Appointment appointment)
         {
             if(context.Appointment.Contains(appointment) == false)
@@ -46,6 +51,7 @@ namespace MedicNoteBookDatabase.Models
             }
         }
 
+        //this allows the user to delete an appointment from the database if the appointment is valid 
         public void DeleteAppointment(int id, Appointment appointment)
         {
             Appointment app = context.Appointment.FirstOrDefault(i => i.AppointmentID == id);
@@ -56,6 +62,7 @@ namespace MedicNoteBookDatabase.Models
             }
         }
 
+        //this creates a list of Appointment objects filled with all of the appointments that have been created
         public List<Appointment> ViewBagAppointments(string MedicalProfessional)
         {
             List<Appointment> appointments = new List<Appointment>();

@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Christopher Sanderson
+//MedicNoteBook
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,9 +37,10 @@ namespace MedicNoteBookDatabase.Controllers
             //_protector = provider.CreateProtector(GetType().FullName);
             //_protector = provider.CreateProtector("key-d3431142-2392-4951-a994-125bf74c8d2b");
         }
-
+        //this displays the patient controllers index view
         public IActionResult Index()/*ViewResult */
         {
+            //this checks if an account session is valid or not and redirects the user to the appropriate view
             Account account = HttpContext.Session.getJson<Account>("Account");
             if(account != null)
             {
@@ -126,9 +129,11 @@ namespace MedicNoteBookDatabase.Controllers
             }
         }
 
+        //this displays the appointment view and passes the IQueryable models to the view if there are any
         [HttpPost]
-        public IActionResult Appointments()//(int ID)//Account account)
+        public IActionResult Appointments()
         {
+            //this checks if the account session is valid and redirectsthe user if not to the appointment index view
             Account account = new Account(); 
             account = HttpContext.Session.getJson<Account>("Account");
             if (account == null)
@@ -137,21 +142,16 @@ namespace MedicNoteBookDatabase.Controllers
             }
             else
             {
-                //if (HttpContext.Session.GetString("Name") != null || HttpContext.Session.GetString("Name") != "")
-            //{
-                //Account account = HttpContext.Session.getJson<Account>("Account");
-                ////Appointment appointment = ;
-                //ViewBag.Dates = timesRepository.ViewbagDates(parRepository, appointmentRepository, account.MedicalPersonnel,timesRepository);
-                return View(appointmentRepository.Appointment.Where(app => app.UserReferralID == account.ID));//ID));// account.ID));
+                //this passes the passes the IQueryable models to the view if there are any
+                return View(appointmentRepository.Appointment.Where(app => app.UserReferralID == account.ID));
             }
-            //else
-            //{
-            //    return RedirectToAction("Index", "Appointment");
-            //}
         }
 
-        public /*ViewResult*/ IActionResult PatientAppointmentReferral(/*int ID, */string Name, DateTime DOB)//Account account)
+        //this displays the latest appointments created by the user as long as they are in the future compared to the time at this precise moment
+        public IActionResult PatientAppointmentReferral(string Name, DateTime DOB)
         {
+
+            //this checks if the account session is valid and redirectsthe user if not to the appointment index view
             Account account = new Account();
             account = HttpContext.Session.getJson<Account>("Account");
             if(account == null)
@@ -159,38 +159,42 @@ namespace MedicNoteBookDatabase.Controllers
                 return RedirectToAction("Index", "Appointment");
             }
             else
-            { 
-                if(HttpContext.Session.GetString("Type") == "Patient")
+            {
+                //this checks if the user is a patient and displays their appointments as long as they are in the future compared to the time at this precise moment
+                if (HttpContext.Session.GetString("Type") == "Patient")
                 {
                     return View(appointmentRepository.Appointment.Where(a => a.AppointmentDate >= DateTime.Now).Where(a => a.DOB == DOB).Where(a => a.PatientFullName == Name));//.Where(a => a.Diagnosis == null));
                 }
                 else
                 {
+                    //this displays the medicalPersonnels appointments as long as they are in the future compared to the time at this precise moment
                     return View(appointmentRepository.Appointment.Where(a => a.AppointmentDate >= DateTime.Now).Where(a => a.AppointmentMedicalProfessional == HttpContext.Session.GetString("Name")));
                 }
             }
+            //
             //return View(parRepository.PAR.Where(a => a.Name == account.Name).Where(a => a.DOB == account.DOB));
         }
 
+
+        //this allows logged in user to edit their appointment time
         [HttpGet]
-        public /*ViewResult*/ IActionResult EditAppointment(int id)
+        public IActionResult EditAppointment(int id)
         {
             //if (HttpContext.Session.GetString("Name") != null)
 
+            //this checks if the account session is valid and redirectsthe user if not to the appointment index view
             Account account = new Account();
             account = HttpContext.Session.getJson<Account>("Account");
             if (account != null)
             {
                 Appointment appointment = appointmentRepository.Appointment.FirstOrDefault(a => a.AppointmentID == id);
-                //if(HttpContext.Session.GetString("Type") == "Doctor" || HttpContext.Session.GetString("Type") == "Nurse")
-                //{
-                //    List<string> dates = timesRepository.ViewbagDates(parRepository, );
-                //}
-                //else
-                //{
+
+                //this generates list of dateTime variables converted to string form
                     List<string> dates = timesRepository.ViewbagDates(parRepository, appointmentRepository, appointment.AppointmentMedicalProfessional, appointment.AppointmentDate, timesRepository);
-                //}
+                
+                //this assigns the list of strings to a ViewBag.Dates variable which can be accessed from the view
                 ViewBag.Dates = dates;
+                //this passes the appointment record to the edit appointment view
                 return View(appointmentRepository.Appointment.FirstOrDefault(app => app.AppointmentID == id));
             }
             else
@@ -199,6 +203,7 @@ namespace MedicNoteBookDatabase.Controllers
             }
         }
 
+        //this checks if the model is valid and if it is then the appointment will be added 
         [HttpPost]
         public IActionResult EditAppointment(int id, Appointment appointment)
         {
@@ -206,10 +211,20 @@ namespace MedicNoteBookDatabase.Controllers
             account = HttpContext.Session.getJson<Account>("Account");
             if(account != null)
             {
+                //this checks if the model is valid 
                 if (ModelState.IsValid)
                 {
+                    //this saves the appointment details
                     appointmentRepository.SaveAppointment(id, appointment);
-                    return RedirectToAction("Index", "Patient");
+                    //this checks if the user is a patient or medical personnel and redirects them to the controller
+                    if(HttpContext.Session.GetString("Type") == "Patient")
+                    {
+                        return RedirectToAction("Index", "Patient");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Practitioners");
+                    }
                 }
                 else
                 {
@@ -222,8 +237,9 @@ namespace MedicNoteBookDatabase.Controllers
             }
         }
 
+        //this displays the appointment if the appointment is valid 
         [HttpGet]
-        public /*ViewResult*/ IActionResult DeleteAppointment(int id)
+        public IActionResult DeleteAppointment(int id)
         {
             //if (HttpContext.Session.GetString("Name") != null)
             Account account = new Account();
@@ -244,20 +260,15 @@ namespace MedicNoteBookDatabase.Controllers
             //}
         }
 
-        //this is used for users
+        //this allows the deletion of appointments 
         [HttpPost]
         public IActionResult DeleteAppointment(int id, Appointment app)
         {
             Account account = new Account();
             account = HttpContext.Session.getJson<Account>("Account");
+            //this calls the method that allows the appointment to be deleted
             appointmentRepository.DeleteAppointment(id, app);
             return RedirectToAction("Index", "Patient");
         }
-
-
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
     }
 }

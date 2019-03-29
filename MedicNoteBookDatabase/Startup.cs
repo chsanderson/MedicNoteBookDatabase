@@ -42,6 +42,7 @@ namespace MedicNoteBookDatabase
 
             services.AddDbContext<ApplicationDBContext>(options =>
             options.UseSqlServer(Configuration["Data:MedicNoteBook:ConnectionStrings"]));
+            //this confirms the connections between the interface classes  and the Entity Framework classes
             services.AddTransient<IPatientAppointmentReferralRepository, EFPatientAppointmentReferralRepository>();
             services.AddTransient<IAppointmentRepository, EFAppointmentRepository>();
             services.AddTransient<IAddressRepository, EFAddressRepository>();
@@ -58,6 +59,7 @@ namespace MedicNoteBookDatabase
             services.AddDistributedMemoryCache();
             services.AddScoped<IDataProtectionService, DataProtectionService>();
             services.AddDataProtection();
+            //this creates a cookie to allow sessions to be stored
             services.AddSession(options =>
             {
             //    options.Cookie.Name = "ids";
@@ -67,7 +69,9 @@ namespace MedicNoteBookDatabase
             services.AddMemoryCache();
             services.AddDataProtection()
                 .PersistKeysToFileSystem(new DirectoryInfo(@"c:\MedicNoteBook\keys")
-                );//@"\\server\share\directory\"));
+                );
+            //this is one attempt at allowing strings variables to be encrypted and decrypted
+            //@"\\server\share\directory\"));
             //services.AddDataProtection()
             //    .UseCryptographicAlgorithms(
             //    new ManagedAuthenticatedEncryptorConfiguration()
